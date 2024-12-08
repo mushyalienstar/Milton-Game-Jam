@@ -20,6 +20,7 @@ shape = SubResource("RectangleShape2D_x28xv")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="." groups=["bullet"]]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.0421319, -0.0263673)
@@ -30,3 +31,4 @@ scale = Vector2(0.00402853, 0.00153789)
 texture = ExtResource("1_sbq5u")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

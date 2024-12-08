@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ban2mu7mql0bg"]
+[gd_scene load_steps=11 format=3 uid="uid://ban2mu7mql0bg"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_giwxa"]
 [ext_resource type="Texture2D" uid="uid://cnl47e30t7e83" path="res://Bat.png" id="2_l2dg6"]
+[ext_resource type="PackedScene" uid="uid://d1shb0djqox22" path="res://healthbar.tscn" id="3_84uq0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2q51"]
 atlas = ExtResource("2_l2dg6")
@@ -43,13 +44,13 @@ animations = [{
 size = Vector2(32, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prb4x"]
-size = Vector2(34, 22)
+size = Vector2(38.6667, 24.6667)
 
 [node name="Enemy" type="CharacterBody2D"]
 modulate = Color(0.366595, 0.366595, 0.366595, 1)
 light_mask = 0
 scale = Vector2(1.5, 1.5)
-collision_layer = 5
+collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_giwxa")
 
@@ -63,9 +64,16 @@ position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mv1m7")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 1)
+position = Vector2(1.33333, 1)
 shape = SubResource("RectangleShape2D_prb4x")
+
+[node name="Healthbar" parent="." instance=ExtResource("3_84uq0")]
+offset_left = -15.3333
+offset_top = -20.0
+offset_right = 18.6667
+offset_bottom = -17.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

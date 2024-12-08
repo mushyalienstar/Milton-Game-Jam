@@ -1,9 +1,14 @@
 extends CharacterBody2D
 
 var motion = Vector2()
+var health = 6
+@onready var healthbar = $Healthbar
+
 
 func _ready():
-	pass
+	health = 6
+	#on_dead = die
+	healthbar.init_health(health)
 
 func _physics_process(delta: float) -> void:
 	# Get the player node from the parent scene, which should be the root of the current scene
@@ -17,7 +22,14 @@ func _physics_process(delta: float) -> void:
 		# If the player node wasn't found, print a debug message
 		print("Player node not found!")
 
+	
+	
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("bullet"):
-		print("enemy shotd")
+		health -= 1
+		
+		healthbar.health = health
+		if health <= 0:
+			queue_free()
+

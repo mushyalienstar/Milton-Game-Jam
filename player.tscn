@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4vyniubdjvfm"]
+[gd_scene load_steps=8 format=3 uid="uid://c4vyniubdjvfm"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_icsjk"]
 [ext_resource type="Texture2D" uid="uid://c0n4orcbnh03m" path="res://player.png" id="2_yn68w"]
 [ext_resource type="AudioStream" uid="uid://dhumyupm5o738" path="res://shoot.mp3" id="3_2gtbf"]
+[ext_resource type="PackedScene" uid="uid://d1shb0djqox22" path="res://healthbar.tscn" id="4_2lrl2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_281yj"]
 size = Vector2(16, 16)
@@ -53,6 +54,8 @@ limit_left = 0
 limit_top = 0
 limit_right = 2560
 limit_bottom = 1530
+limit_smoothed = true
+rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
@@ -60,4 +63,20 @@ drag_vertical_enabled = true
 stream = ExtResource("3_2gtbf")
 volume_db = -16.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("4_2lrl2")]
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 264.0
+offset_bottom = 36.0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 2.0
+offset_right = 73.0
+offset_bottom = 25.0
+text = "Player"
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
