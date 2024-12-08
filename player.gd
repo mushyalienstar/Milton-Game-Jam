@@ -4,14 +4,14 @@ extends CharacterBody2D
 @export var bullet_speed: float = 500.0  # Speed of bullets
 @export var bullet_scene: PackedScene = preload("res://bullet.tscn")  # Path to your bullet scene
 @export var enemy_scene: PackedScene = preload("res://Enemy.tscn")    # Path to your enemy scene
-@onready var health_bar = $"../HealthBar"
+@onready var sfx_shoot = $sfx_shoot
+@onready var health_bar = $"../CanvasLayer/HealthBar"
 
 var hp = 10
 
 func _ready() -> void:
 	# Instantiate and add the enemy to the scene at the start
 	var enemy_instance = enemy_scene.instantiate()
-	
 	health_bar.value = hp
 	
 	# Optionally, set the position of the enemy (e.g., center of the screen)
@@ -46,6 +46,7 @@ func _physics_process(delta: float) -> void:
 
 func fire():
 	# Spawn a bulletw
+	sfx_shoot.play()
 	var bullet_instance = bullet_scene.instantiate()
 	bullet_instance.position = position + Vector2(0, 0).rotated(rotation)  # Offset to avoid spawning inside the player
 	bullet_instance.rotation = rotation  # Set bullet's rotation to match player rotation
