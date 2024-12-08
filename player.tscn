@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4vyniubdjvfm"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_icsjk"]
+[ext_resource type="Texture2D" uid="uid://c0n4orcbnh03m" path="res://player.png" id="2_yn68w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_281yj"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snxsb"]
+size = Vector2(18, 18)
+
+[sub_resource type="Environment" id="Environment_yi1eg"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 6.77
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("1_icsjk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_281yj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(3, 3, 3, 1)
+self_modulate = Color(3, 3, 3, 1)
+scale = Vector2(0.00799705, 0.00799705)
+texture = ExtResource("2_yn68w")
+
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_snxsb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yi1eg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 1530
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

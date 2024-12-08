@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://co20ffrcx5bnr"]
+
+[ext_resource type="Script" path="res://bullet.tres.gd" id="1_8f168"]
+[ext_resource type="Texture2D" uid="uid://c0n4orcbnh03m" path="res://player.png" id="1_sbq5u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x28xv"]
+size = Vector2(9.05165, 3.55335)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8byut"]
+size = Vector2(8.08426, 3.09074)
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_8f168")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x28xv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="." groups=["bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.0421319, -0.0263673)
+shape = SubResource("RectangleShape2D_8byut")
+
+[node name="Player" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.00402853, 0.00153789)
+texture = ExtResource("1_sbq5u")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
